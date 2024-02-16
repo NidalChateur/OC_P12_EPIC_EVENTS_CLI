@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "epic-events"
+version = "0.1.0"
+description = "CRM"
+authors = ["Nidal Chateur <nidalchateur@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rich = "^13.7.0"
+sqlalchemy = "^2.0.27"
+wtforms = "^3.1.2"
+werkzeug = "^3.0.1"
+bcrypt = "^4.1.2"
+python-dotenv = "^1.0.1"
+cryptography = "^42.0.2"
+email-validator = "^2.1.0.post1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+pytest-cov = "^4.1.0"
+flake8 = "^7.0.0"
+flake8-html = "^0.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
