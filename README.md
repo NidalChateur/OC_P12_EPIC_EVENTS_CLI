@@ -9,6 +9,7 @@
 [![Pytest](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/pytest.yml/badge.svg)](https://github.com/NidalChateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/pytest.yml)
 [![Flake8](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/flake8.yml/badge.svg)](https://github.com/NidalChateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/flake8.yml)
 [![codecov](https://codecov.io/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/graph/badge.svg?token=NHFGB57WWL)](https://codecov.io/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/12a4581869cb4c9cb4930745da6dd948)](https://app.codacy.com/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 # EPIC EVENTS CRM 
 
