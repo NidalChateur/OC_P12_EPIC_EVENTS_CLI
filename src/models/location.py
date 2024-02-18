@@ -40,15 +40,9 @@ class Location(AbstractTimeField):
         else:
             street_name = ""
 
-        if self.zip_code:
-            zip_code = f"{self.zip_code} "
-        else:
-            zip_code = ""
+        zip_code = f"{self.zip_code} "
 
-        if self.city:
-            city = f"{self.city.title()}"
-        else:
-            city = ""
+        city = f"{self.city.title()}"
 
         return f"{name}{number}{street_type}{street_name}{zip_code}{city}"
 

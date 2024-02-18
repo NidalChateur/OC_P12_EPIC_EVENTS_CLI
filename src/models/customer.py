@@ -49,7 +49,7 @@ class Customer(AbstractUser):
     @property
     def slug_commercial_name(self) -> str:
         if self.commercial:
-            return self.commercial.name
+            return slugify(self.commercial.name)
 
         return ""
 
@@ -57,7 +57,7 @@ class Customer(AbstractUser):
         """save slug"""
 
         slug_company = slugify(self.prompt_company_name)
-        slug_commercial = slugify(self.slug_commercial_name)
+        slug_commercial = self.slug_commercial_name
         self.slug = f"{self.id}-{self.slug_first_name}-{self.slug_last_name}-{slug_company}-{slug_commercial}"
 
         session.commit()

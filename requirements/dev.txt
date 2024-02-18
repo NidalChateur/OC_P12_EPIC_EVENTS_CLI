@@ -13,4 +13,6 @@ bcrypt
 cryptography
 pyjwt[crypto]
 
+sentry-sdk
+
 

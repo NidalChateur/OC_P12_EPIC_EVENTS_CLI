@@ -1,3 +1,4 @@
+import re
 from datetime import date
 
 from wtforms import DateField, Form, IntegerField, StringField, ValidationError
@@ -33,33 +34,39 @@ class PasswordForm(Form):
         label="Confirmation mot de passe",
     )
 
-    # def validate_password(self, field):
-    #     if len(field.data) < 8:
-    #         raise ValidationError(
-    #             "Votre mot de passe doit contenir au minimum 8 caractères."
-    #         )
-    #     if field.data.isdigit():
-    #         raise ValidationError(
-    #             "Votre mot de passe ne peut pas être entièrement numérique."
-    #         )
-    #     if field.data.isalpha():
-    #         raise ValidationError(
-    #             "Votre mot de passe doit contenir au moins un chiffre."
-    #         )
+    def validate_password(self, field):
+        if len(field.data) < 8:
+            raise ValidationError(
+                "Votre mot de passe doit contenir au minimum 8 caractères."
+            )
+        if field.data.isdigit():
+            raise ValidationError(
+                "Votre mot de passe ne peut pas être entièrement numérique."
+            )
+        if field.data.isalpha():
+            raise ValidationError(
+                "Votre mot de passe doit contenir au moins un chiffre."
+            )
 
-    #     if not re.search(r"[A-Z]", field.data):
-    #         raise ValidationError(
-    #             "Votre mot de passe doit contenir au moins une lettre majuscule."
-    #         )
-    #     if not re.search(r"[a-z]", field.data):
-    #         raise ValidationError(
-    #             "Votre mot de passe doit contenir au moins une lettre minuscule."
-    #         )
+        if not re.search(r"[A-Z]", field.data):
+            raise ValidationError(
+                "Votre mot de passe doit contenir au moins une lettre majuscule."
+            )
+        if not re.search(r"[a-z]", field.data):
+            raise ValidationError(
+                "Votre mot de passe doit contenir au moins une lettre minuscule."
+            )
 
-    #     if all([character in field.data for character in self.SPECIAL_CHARACTERS]):
-    #         raise ValidationError(
-    #             "Votre mot de passe doit contenir au moins un caractère spécial."
-    #         )
+        contains_special = False
+        for character in field.data:
+            if character in self.SPECIAL_CHARACTERS:
+                contains_special = True
+                break
+
+        if not contains_special:
+            raise ValidationError(
+                "Votre mot de passe doit contenir au moins un caractère spécial."
+            )
 
 
 class LoginForm(Form):

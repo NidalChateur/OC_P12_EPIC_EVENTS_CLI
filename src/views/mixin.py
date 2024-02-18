@@ -38,7 +38,7 @@ class MixinView:
 
             console.print(success_msg1, style="bold green")
 
-            success_msg2 = f"Vous pouvez maintenant créer un événement pour le {self.name} n°{obj.id}\n"
+            success_msg2 = f"Vous pouvez maintenant créer un événement pour le {self.name} n°{obj.id}.\n"
 
             console.print(success_msg2, style="bold blue")
 
@@ -68,7 +68,7 @@ class MixinView:
                 console.print(f"  - {label} : {', '.join(errors)}")
 
     @classmethod
-    def print_permission_denied(self):
+    def print_permission_denied(self, log: str = None):
         console.print("\nPermission refusée !", style="bold red")
 
     @classmethod

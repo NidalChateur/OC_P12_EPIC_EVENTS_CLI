@@ -39,9 +39,7 @@ class AbstractNameField(AbstractTimeField):
     slug_name = Column(String(255))
 
     def __str__(self) -> str:
-        if self.name:
-            return f"{self.name.capitalize()}"
-        return unfilled
+        return self.name.capitalize()
 
     def __repr__(self) -> str:
         return str(self)
@@ -63,15 +61,9 @@ class AbstractUser(AbstractTimeField):
     phone = Column(String(20))
 
     def __str__(self) -> str:
-        if self.first_name:
-            first_name = self.first_name.capitalize()
-        else:
-            first_name = unfilled
+        first_name = self.first_name.capitalize()
 
-        if self.last_name:
-            last_name = self.last_name.capitalize()
-        else:
-            last_name = unfilled
+        last_name = self.last_name.capitalize()
 
         return f"{first_name} {last_name}"
 

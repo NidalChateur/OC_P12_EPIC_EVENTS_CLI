@@ -28,23 +28,21 @@ class Collaborator(AbstractUser):
 
     @property
     def prompt_department(self) -> str:
-        if self.department_id:
+        if self.department:
             return str(self.department)
 
         return ""
 
     @property
     def role(self) -> str:
-        if self.department_id:
+        if self.department:
             return str(self.department)
 
         return unfilled
 
     @property
     def title(self) -> str:
-        if self.first_name:
-            return f"{self.role} {self.first_name.capitalize()}"
-        return f"{self.role} {unfilled}"
+        return f"{self.role} {self.first_name.capitalize()}"
 
     @property
     def formatted_birthdate(self) -> str:
@@ -56,7 +54,7 @@ class Collaborator(AbstractUser):
 
     @property
     def _slug_role(self) -> str:
-        if self.department_id:
+        if self.department:
             return self.department.slug_name
 
         return ""
@@ -80,7 +78,7 @@ class Collaborator(AbstractUser):
 
     @classmethod
     def check_password(self, password: str, hashed_password: bytes) -> bool:
-        if hashed_password:
+        if hashed_password and password:
             return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
 
         return False
