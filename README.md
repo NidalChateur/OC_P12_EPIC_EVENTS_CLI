@@ -6,10 +6,10 @@
 [![Sentry](https://img.shields.io/badge/sentry-logs-purple.svg?logo=Sentry)](https://sentry.io/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-[![Pytest](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/pytest.yml/badge.svg)]()
-[![Flake8](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/flake8.yml/badge.svg)]()
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/12a4581869cb4c9cb4930745da6dd948)](https://app.codacy.com/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Pytest](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/pytest.yml/badge.svg)](https://github.com/NidalChateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/pytest.yml)
+[![Flake8](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/flake8.yml/badge.svg)](https://github.com/NidalChateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/flake8.yml)
 [![codecov](https://codecov.io/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/graph/badge.svg?token=NHFGB57WWL)](https://codecov.io/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/12a4581869cb4c9cb4930745da6dd948)](https://app.codacy.com/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 # EPIC EVENTS CRM 
 
@@ -23,7 +23,7 @@ Command-line user interface.
 
 
 ## Database schema
- - <a href="https://github.com/NidalChateur/OC_P12_EPIC_EVENTS/blob/main/mission/schema_bdd.pdf">Epic Events database schema</a> 
+ - <a href="https://github.com/NidalChateur/OC_P12_EPIC_EVENTS_CLI/blob/dev/mission/schema_bdd.pdf">Epic Events database schema</a> 
 
 ## Use cases
 
