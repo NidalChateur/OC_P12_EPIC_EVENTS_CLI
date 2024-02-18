@@ -3,132 +3,112 @@
 
 [![Python](https://raw.githubusercontent.com/NidalChateur/badges/779ce02cc0ce5bdc16ca2fe297b1229d4e5068d3/svg/python.svg)](https://www.python.org/) 
 [![Poetry](https://img.shields.io/badge/poetry-1.7.1-blue.svg?logo=Poetry)](https://python-poetry.org/)
+[![Sentry](https://img.shields.io/badge/sentry-logs-purple.svg?logo=Sentry)](https://sentry.io/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Flake8](https://img.shields.io/badge/linting-flake8-yellowgreen.svg?logo=python)](https://github.com/pycqa/flake8)
-[![Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen.svg?logo=python)](https://github.com/pylint-dev/pylint)
 
-# Projet EPIC EVENTS CRM 
+[![Pytest](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/pytest.yml/badge.svg)]()
+[![Flake8](https://github.com/Nidalchateur/OC_P12_EPIC_EVENTS_CLI/actions/workflows/flake8.yml/badge.svg)]()
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/12a4581869cb4c9cb4930745da6dd948)](https://app.codacy.com/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![codecov](https://codecov.io/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI/graph/badge.svg?token=NHFGB57WWL)](https://codecov.io/gh/NidalChateur/OC_P12_EPIC_EVENTS_CLI)
 
-
-Epic Events est une entreprise qui organise des événements (fêtes,
-réunions professionnelles, manifestations hors les murs) pour ses clients.
-
-Le logiciel CRM permet de collecter et de traiter les données des clients
-et de leurs événements, tout en facilitant la communication entre les
-différents pôles de l'entreprise.
-
-Interface utilisateur en ligne de commande.
+# EPIC EVENTS CRM 
 
 
+Epic Events is a company that organizes events (parties, professional meetings, off-site gatherings) for its clients.
 
- ## Réalisations
- - <a href="https://github.com/NidalChateur/OC_P12_EPIC_EVENTS/blob/main/mission/schema_bdd.pdf">Schéma de base de donnée Epic Events.</a> 
+The CRM software enables the collection and processing of client data and their events, while facilitating communication between different departments of the company.
 
-## Cas d'usages
+Command-line user interface.
 
- #### Besoin généraux
-- Chaque collaborateur doit avoir ses identifiants pour utiliser la
-plateforme.
 
-- Chaque collaborateur est associé à un rôle (suivant son
-département).
 
-- La plateforme doit permettre de stocker et de mettre à jour les
-informations sur les clients, les contrats et les événements.
+## Database schema
+ - <a href="https://github.com/NidalChateur/OC_P12_EPIC_EVENTS/blob/main/mission/schema_bdd.pdf">Epic Events database schema</a> 
 
-- Tous les collaborateurs doivent pouvoir accéder à tous les clients,
-contrats et événements en lecture seule.
+## Use cases
 
- #### Cas d'usages d'un utilisateur Gestion
-1. Créer, mettre à jour et supprimer des collaborateurs dans le
-système CRM.
+#### General Requirements
 
-2. Créer et modifier tous les contrats.
+- Each employee must have their own credentials to access the platform.
 
-3. Filtrer l’affichage des événements, par exemple : afficher tous les
-événements qui n’ont pas de « support » associé.
+- Each employee is associated with a role (based on their department).
 
-4. Modifier des événements (pour associer un collaborateur support à
-l’événement).
+- The platform should allow for the storage and updating of information regarding clients, contracts, and events.
 
- #### Cas d'usages d'un utilisateur Commercial
+- All employees should have read-only access to all clients, contracts, and events.
 
-1. Créer des clients (le client leur sera automatiquement associé).
+#### Use Cases for Management User
 
-2.  Mettre à jour les clients dont ils sont responsables.
+1. Create, update, and delete employees in the CRM system
 
-3.  Modifier/mettre à jour les contrats des clients dont ils sont
-responsables.
+2. Create and modify all contracts.
 
-4. Filtrer l’affichage des contrats, par exemple : afficher tous les
-contrats qui ne sont pas encore signés, ou qui ne sont pas encore
-entièrement payés.
+3. Filter the display of events, for example: show all events that do not have an associated "support."
 
-5. Créer un événement pour un de leurs clients qui a signé un
-contrat.
+4. Modify events (to associate a support employee with the event).
 
- #### Cas d'usages d'un utilisateur Support
+#### Use Cases for Sales User
 
-1. Filtrer l’affichage des événements, par exemple : afficher
-uniquement les événements qui leur sont attribués.
+1. Create clients (the client will be automatically associated with them)
 
-2. Mettre à jour les événements dont ils sont responsables
+2.  Update clients they are responsible for.
 
-## Pré-requis
+3.  Modify/update contracts for clients they are responsible for.
 
-* Installer Python 3 : [Téléchargement Python 3](https://www.python.org/downloads/)
-* Installer git : [Téléchargement Git](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git)
+4. Filter the display of contracts, for example: show all contracts that are not yet signed, or that are not fully paid.
 
-## Installation
+5. Create an event for one of their clients who has signed a contract.
 
-### 1. Télécharger le projet sur votre répertoire local : 
+#### Use Cases for Support User
+
+1. Filter the display of events, for example: show only the events assigned to them.
+
+2. Update the events they are responsible for.
+
+
+## Install
+
+### 0. Get Python and Git
+
+* [Python](https://www.python.org/downloads/)
+* [Git](https://git-scm.com/book/en/v2)
+
+
+### 1. Clone
 ```
-git clone https://github.com/NidalChateur/OC_P12_EPIC_EVENTS
-cd OC_P12_EPIC_EVENTS
+git clone https://github.com/NidalChateur/OC_P12_EPIC_EVENTS_CLI.git
+cd OC_P12_EPIC_EVENTS_CLI
 ```
-### 2. Mettre en place un environnement virtuel :
-* Créer l'environnement virtuel: `python -m venv env`
+### 2. Create the virtual env
 
-### 3. Activer l'environnement virtuel
-* Activer l'environnement virtuel :
-    * Windows : `env\Scripts\activate.bat`
-    * Unix/MacOS : `source env/bin/activate`
+```
+python -m venv env
+```
+
+### 3. Create the virtual env
+
+- Windows : `env\Scripts\activate.bat`
+- Unix/MacOS : `source env/bin/activate`
    
-### 4. Installer les dépendances du projet
+### 4. Install poetry
 
 ```
-python -m pip install --upgrade pip
-
 pip install poetry
+```
 
+### 4. Install dependencies
+
+```
 poetry install
 ```
 
-### 5. Démarrage avec poetry
-* Lancer le script à l'aide de la commande suivante : `poetry run python main.py`
+### 5. Run
+
+```
+poetry run python main.py
+```
 
 
-Les étapes 1, 2 et 4 ne sont requises que pour l'installation initiale. Pour les lancements ultérieurs de l'application, il suffit d'exécuter les étapes 3 et 5 à partir du répertoire racine du projet.
+## Activate Sentry
 
-## Générer un rapport d'erreur grâce à flake8
-
-Flake8 est souvent utilisé pour vérifier le respect des conventions de style PEP 8 dans le code Python. Pour réaliser ceci, se positionner à la racine du projet puis exécuter dans le terminal : 
-
-`poetry run flake8`
-
-Un rapport d'erreur au format html sera alors disponible dans le dossier "flake8_html_report".
-
-## Générer un rapport complet et détaillé de couverture de test 
-
-La couverture de test vérifie le taux de lignes couvertes par des tests. 
-
-Pour réaliser ceci, se positionner à la racine du projet puis exécuter dans le terminal : 
-
-`poetry run pytest --cov=. --cov-report html`
-
-Quand le script est terminé, vous découvrez qu'un nouveau dossier "htmlcov" a été créé à l'endroit où vous avez lancé la commande. Ce dossier contient différents documents dont des fichiers HTML.
-
-Ouvrez le fichier "index.html" qui contient un résumé du rapport de couverture.
-
-À partir de cette page, vous pourrez naviguer à travers les différents fichiers afin d’avoir le détail sur la couverture. Effectivement, vous aurez un rapport détaillé pour chaque fichier source sous le format HTML.
-
+In the .env file automatically created after the application starts, add the [Sentry](https://https://sentry.io/) key to the SENTRY_DSN variable without quotation marks.
