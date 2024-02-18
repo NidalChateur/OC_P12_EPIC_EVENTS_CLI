@@ -1,6 +1,7 @@
 import sys
 
 from rich.console import Console
+import logging
 
 console = Console()
 
@@ -15,6 +16,7 @@ class MixinView:
             success_msg = f"{self.name.title()} n°{obj.id} créé avec succès !\n"
 
             console.print(success_msg, style="bold green")
+            logging.info(success_msg)
 
     @classmethod
     def print_update_success(self, obj):
@@ -23,11 +25,13 @@ class MixinView:
             success_msg = f"{self.name.title()} n°{obj.id} modifié avec succès !\n"
 
             console.print(success_msg, style="bold green")
+            logging.info(success_msg)
 
     @classmethod
     def print_delete_success(self, obj_id: int):
         success_msg = f"\n\n{self.name.title()} n°{obj_id} supprimé avec succès !\n\n"
         console.print(success_msg, style="bold green")
+        logging.info(success_msg)
 
     @classmethod
     def print_signature_success(self, session, obj):
@@ -37,6 +41,7 @@ class MixinView:
             )
 
             console.print(success_msg1, style="bold green")
+            logging.info(success_msg1)
 
             success_msg2 = f"Vous pouvez maintenant créer un événement pour le {self.name} n°{obj.id}.\n"
 
