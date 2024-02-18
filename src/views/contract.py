@@ -169,5 +169,3 @@ class View(MixinView):
             input_data["is_signed"] = False
 
         return ContractForm(MultiDict(input_data))
-
-
