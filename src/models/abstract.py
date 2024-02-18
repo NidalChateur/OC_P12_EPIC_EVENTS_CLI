@@ -78,7 +78,7 @@ class AbstractUser(AbstractTimeField):
     def formatted_phone(self) -> str:
         if self.phone:
             return " ".join(
-                [self.phone[i : i + 2] for i in range(0, len(self.phone), 2)]
+                [self.phone[i: i + 2] for i in range(0, len(self.phone), 2)]
             )
 
         return unfilled

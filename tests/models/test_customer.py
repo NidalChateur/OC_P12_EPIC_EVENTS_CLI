@@ -27,7 +27,7 @@ class TestCustomer(MixinSetup):
         obj = self.session.get(Customer, 1)
 
         assert obj.formatted_phone == " ".join(
-            [obj.phone[i : i + 2] for i in range(0, len(obj.phone), 2)]
+            [obj.phone[i: i + 2] for i in range(0, len(obj.phone), 2)]
         )
 
         obj.phone = ""

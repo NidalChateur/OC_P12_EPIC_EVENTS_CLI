@@ -51,7 +51,7 @@ class TestLocationForm:
         form = LocationForm(MultiDict(data))
 
         assert form.validate() is False
-        
+
         # zip_code is too long
         data = {
             "zip_code": "88888888",

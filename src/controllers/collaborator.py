@@ -165,7 +165,7 @@ class Controller:
             return None
 
         View.print_detail(obj)
-        
+
         form1, email_is_unchanged = View.get_collaborator_data_to_update(obj)
         form2 = View.get_department_data_to_update(obj)
         if all([form1.validate(), form2.validate()]):
