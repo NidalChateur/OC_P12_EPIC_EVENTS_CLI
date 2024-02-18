@@ -26,7 +26,7 @@ class LocationForm(Form):
 
     zip_code = StringField(
         validators=[
-            Length(max=6, message="Ce champ ne peut pas dépasser 6 caractères."),
+            Length(max=5, message="Ce champ ne peut pas dépasser 5 caractères."),
             InputRequired(REQUIRED_MESSAGE),
         ],
         label="Code postal",
@@ -48,13 +48,6 @@ class LocationForm(Form):
             return False
 
         if self.zip_code.data and not self.zip_code.data.isdigit():
-            self.zip_code.errors.append(
-                "Le code postal doit être composé de 5 chiffres."
-            )
-
-            return False
-
-        if self.zip_code.data and len(self.zip_code.data) > 5:
             self.zip_code.errors.append(
                 "Le code postal doit être composé de 5 chiffres."
             )
@@ -86,7 +79,7 @@ class LocationForm(Form):
         zip_code = self.zip_code.data
 
         self.slug_form.data = slugify(
-            f"{name} {number} {street_type} {street_name} {zip_code} {city}"
+            f"{name} {number} {street_type} {street_name} {zip_code} {city}".strip()
         )
 
         return True

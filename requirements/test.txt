@@ -13,6 +13,8 @@ bcrypt
 cryptography
 pyjwt[crypto]
 
+sentry-sdk
+
 
 # tests
 pytest
