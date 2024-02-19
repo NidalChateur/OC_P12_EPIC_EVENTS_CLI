@@ -1,7 +1,7 @@
 import sys
 
 from rich.console import Console
-import logging
+from sentry_sdk import capture_message
 
 console = Console()
 
@@ -10,13 +10,26 @@ class MixinView:
     name = ""
 
     @classmethod
+    def print_read_only_menu(self):
+        console.print("\n0. Retour", style="bold", justify="center")
+        console.print("\n1. Lister", style="bold", justify="center")
+        console.print("\n2. Rechercher", style="bold", justify="center")
+        console.print("\n3. Détail", style="bold", justify="center")
+
+    @classmethod
+    def print_edit_menu(self):
+        console.print("\n4. Créer", style="bold", justify="center")
+        console.print("\n5. Modifier", style="bold", justify="center")
+        console.print("\n6. Supprimer", style="bold", justify="center")
+
+    @classmethod
     def print_create_success(self, obj):
         if obj and obj.id:
             self.print_valid_forms()
             success_msg = f"{self.name.title()} n°{obj.id} créé avec succès !\n"
 
             console.print(success_msg, style="bold green")
-            logging.info(success_msg)
+            capture_message(success_msg)
 
     @classmethod
     def print_update_success(self, obj):
@@ -25,13 +38,13 @@ class MixinView:
             success_msg = f"{self.name.title()} n°{obj.id} modifié avec succès !\n"
 
             console.print(success_msg, style="bold green")
-            logging.info(success_msg)
+            capture_message(success_msg)
 
     @classmethod
     def print_delete_success(self, obj_id: int):
         success_msg = f"\n\n{self.name.title()} n°{obj_id} supprimé avec succès !\n\n"
         console.print(success_msg, style="bold green")
-        logging.info(success_msg)
+        capture_message(success_msg)
 
     @classmethod
     def print_signature_success(self, session, obj):
@@ -41,7 +54,7 @@ class MixinView:
             )
 
             console.print(success_msg1, style="bold green")
-            logging.info(success_msg1)
+            capture_message(success_msg1)
 
             success_msg2 = f"Vous pouvez maintenant créer un événement pour le {self.name} n°{obj.id}.\n"
 

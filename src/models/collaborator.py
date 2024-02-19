@@ -1,5 +1,7 @@
+from datetime import datetime
+
 import bcrypt
-from sqlalchemy import Column, Date, DateTime, ForeignKey, Integer, String, func
+from sqlalchemy import Column, Date, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from src.utils.fernet import Fernet
@@ -87,7 +89,7 @@ class Collaborator(AbstractUser):
     def authenticate(self, session, email: str, password: str):
         collaborator = self.get_with_clear_email(session, email)
         if collaborator and self.check_password(password, collaborator.password):
-            collaborator.last_login = func.now()
+            collaborator.last_login = datetime.utcnow()
             session.commit()
 
             return collaborator

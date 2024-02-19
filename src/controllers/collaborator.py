@@ -3,6 +3,7 @@ from ..models.abstract import slugify
 from ..models.collaborator import Collaborator
 from ..models.department import Department
 from ..utils.fernet import Fernet
+from ..utils.session import session_is_expired
 from ..views.collaborator import View
 
 model1 = Collaborator
@@ -15,7 +16,16 @@ class Controller:
         self._menu(session, user)
 
     @classmethod
+    def return_to_menu(self, session, user):
+        self._menu(session, user)
+
+    @classmethod
     def _menu(self, session, user) -> bool:
+        if session_is_expired(user):
+            View.logout()
+
+            return None
+
         View.print_menu()
 
         choice = View.get_user_choice()
@@ -43,7 +53,7 @@ class Controller:
         if choice == 6:
             self._delete(session)
 
-        self._menu(session, user)
+        self.return_to_menu(session, user)
 
     @classmethod
     def _list(self, session):
