@@ -19,19 +19,14 @@ class View(MixinView):
     @classmethod
     def print_commercial_menu(self):
         self.print_menu()
-        console.print("\n4. Créer", style="bold", justify="center")
-        console.print("\n5. Modifier", style="bold", justify="center")
-        console.print("\n6. Supprimer", style="bold", justify="center")
+        self.print_edit_menu()
 
     @classmethod
     def print_menu(self):
         console.print("\nMenu Client", style="bold", justify="center")
         console.print("___________", justify="center")
 
-        console.print("\n0. Retour", style="bold", justify="center")
-        console.print("\n1. Lister", style="bold", justify="center")
-        console.print("\n2. Rechercher", style="bold", justify="center")
-        console.print("\n3. Détail", style="bold", justify="center")
+        self.print_read_only_menu()
 
     @classmethod
     def print_list(self, qs: list, list_name: str, page_size=5):

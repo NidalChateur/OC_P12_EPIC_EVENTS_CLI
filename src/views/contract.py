@@ -37,10 +37,7 @@ class View(MixinView):
         console.print(f"\nMenu {self.name.title()}", style="bold", justify="center")
         console.print("____________", justify="center")
 
-        console.print("\n0. Retour", style="bold", justify="center")
-        console.print("\n1. Lister", style="bold", justify="center")
-        console.print("\n2. Rechercher", style="bold", justify="center")
-        console.print("\n3. Détail", style="bold", justify="center")
+        self.print_read_only_menu()
 
     @classmethod
     def print_list(self, qs: list[model], list_name: str, page_size=5):
@@ -169,5 +166,3 @@ class View(MixinView):
             input_data["is_signed"] = False
 
         return ContractForm(MultiDict(input_data))
-
-

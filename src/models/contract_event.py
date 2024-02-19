@@ -126,12 +126,14 @@ class Contract(AbstractTimeField):
         else:
             slug_customer = ""
 
-        if self.customer.commercial:
+        if self.customer and self.customer.commercial:
             slug_commercial = slugify(self.commercial_name)
         else:
             slug_commercial = ""
 
-        self.slug = f"{self.id}-{slug_customer}-{slug_commercial}-{self.total_amount}"
+        self.slug = slugify(
+            f"{self.id} {slug_customer} {slug_commercial} {self.total_amount}"
+        )
         session.commit()
 
 
@@ -239,7 +241,7 @@ class Event(AbstractTimeField):
     @property
     def support_email(self):
         if self.support:
-            return self.support.email
+            return Fernet.decrypt(self.support.email)
 
         return unfilled
 

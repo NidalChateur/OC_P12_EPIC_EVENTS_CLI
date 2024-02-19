@@ -1,5 +1,3 @@
-import os
-
 from ..forms.collaborator import FirstConnexionForm
 from ..models.collaborator import Collaborator
 from ..models.department import Department
@@ -10,18 +8,26 @@ from . import home
 
 
 class Controller:
+    session = init_db()
+
     @classmethod
     def run(self):
-        session = init_db()
-
-        collaborators = session.query(Collaborator).all()
+        collaborators = self.session.query(Collaborator).all()
 
         if collaborators:
-            self._menu(session)
+            self._menu(self.session)
         else:
-            self._create_gestion_account(session)
+            self._create_gestion_account(self.session)
 
+        self.re_run()
+
+    @classmethod
+    def re_run(self):
         self.run()
+
+    @classmethod
+    def return_to_menu(self, session):
+        self._menu(session)
 
     @classmethod
     def _menu(self, session):
@@ -32,6 +38,8 @@ class Controller:
         if choice == 0:
             # 1. quit
             View.logout()
+
+            return None
 
         if choice == 1:
             # 1. login
@@ -48,7 +56,7 @@ class Controller:
             user = self._first_login(session)
             self._create_password(session, user)
 
-        self._menu(session)
+        self.return_to_menu(session)
 
     @classmethod
     def _create_gestion_account(self, session):
@@ -172,10 +180,3 @@ class Controller:
             View.print_password_update_success()
         else:
             View.print_forms_errors(form)
-
-    @classmethod
-    def clear_shell(self):
-        if os.name == "posix":  # Unix/Linux
-            os.system("clear")
-        if os.name == "nt":  # Windows
-            os.system("cls")
