@@ -12,26 +12,6 @@ from tests import MixinSetup
 
 
 class TestController(MixinSetup):
-    def test_run_and_quit(self, monkeypatch):
-        self.clear_db()
-
-        # forbidden paths
-        monkeypatch.setattr(
-            Controller, "_create_gestion_account", self.mock_permission_denied
-        )
-
-        monkeypatch.setattr(Controller, "return_to_menu", self.mock_permission_denied)
-
-        # allowed path
-        monkeypatch.setattr(Controller, "session", self.session)
-        monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
-        monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 0)
-        monkeypatch.setattr(View, "logout", lambda *args, **kwargs: None)
-
-        # run paths
-        self.create_collaborator("Gestion")
-        Controller.run()
-
     def test_create_the_first_gestion_account(self, monkeypatch):
         self.clear_db()
 
@@ -54,6 +34,7 @@ class TestController(MixinSetup):
         form2 = PasswordForm(MultiDict(input_data2))
 
         # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
         monkeypatch.setattr(Controller, "session", self.session)
         monkeypatch.setattr(View, "get_gestion_data", lambda *args, **kwargs: form1)
         monkeypatch.setattr(View, "create_password", lambda *args, **kwargs: form2)
@@ -69,6 +50,27 @@ class TestController(MixinSetup):
         created_gestion = self.session.get(Collaborator, 1)
         assert created_gestion
         assert Fernet.decrypt(created_gestion.email) == input_data.get("email")
+
+    def test_run_and_quit(self, monkeypatch):
+        self.clear_db()
+
+        # forbidden paths
+        monkeypatch.setattr(
+            Controller, "_create_gestion_account", self.mock_permission_denied
+        )
+
+        monkeypatch.setattr(Controller, "return_to_menu", self.mock_permission_denied)
+
+        # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
+        monkeypatch.setattr(Controller, "session", self.session)
+        monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
+        monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 0)
+        monkeypatch.setattr(View, "logout", lambda *args, **kwargs: None)
+
+        # run paths
+        self.create_collaborator("Gestion")
+        Controller.run()
 
     def test_login(self, monkeypatch):
         self.clear_db()
@@ -94,6 +96,7 @@ class TestController(MixinSetup):
         monkeypatch.setattr(View, "print_login_failure", self.mock_permission_denied)
 
         # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
         monkeypatch.setattr(Controller, "session", self.session)
         monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
         monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 1)
@@ -134,6 +137,7 @@ class TestController(MixinSetup):
         monkeypatch.setattr(HomeMenu, "run", self.mock_permission_denied)
 
         # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
         monkeypatch.setattr(Controller, "session", self.session)
         monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
         monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 1)
@@ -178,6 +182,7 @@ class TestController(MixinSetup):
         monkeypatch.setattr(View, "print_forms_errors", self.mock_permission_denied)
 
         # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
         monkeypatch.setattr(Controller, "session", self.session)
         monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
         monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 2)
@@ -236,6 +241,7 @@ class TestController(MixinSetup):
         monkeypatch.setattr(View, "print_forms_errors", self.mock_permission_denied)
 
         # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
         monkeypatch.setattr(Controller, "session", self.session)
         monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
         monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 3)
@@ -292,6 +298,7 @@ class TestController(MixinSetup):
         )
 
         # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
         monkeypatch.setattr(Controller, "session", self.session)
         monkeypatch.setattr(View, "print_menu", lambda *args, **kwargs: None)
         monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 3)
