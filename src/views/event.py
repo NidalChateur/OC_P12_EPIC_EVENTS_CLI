@@ -10,7 +10,6 @@ from ..forms.event import EventForm
 from ..forms.location import LocationForm
 from ..models.collaborator import Collaborator
 from ..models.contract_event import Contract, Event
-from ..utils.fernet import Fernet
 from .collaborator import View as CollaboratorView
 from .contract import View as ContractView
 from .mixin import MixinView
@@ -104,7 +103,7 @@ class View(MixinView):
             table.add_row("Tel client", obj.customer_phone)
             table.add_row("", "")
             table.add_row("Nom support", obj.support_name)
-            table.add_row("Email support", Fernet.decrypt(obj.support_email))
+            table.add_row("Email support", obj.support_email)
             table.add_row("Tel support", obj.support_phone)
             table.add_row("", "")
             table.add_row("Date de début", obj.formatted_start_date)

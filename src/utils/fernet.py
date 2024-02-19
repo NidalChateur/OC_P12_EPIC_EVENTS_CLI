@@ -1,4 +1,4 @@
-import logging
+from sentry_sdk import capture_exception
 
 from ..settings.settings import fernet
 
@@ -13,7 +13,7 @@ class Fernet:
         except Exception as e:
             error_msg = f"encrypt error : {e}"
             print(error_msg)
-            logging.exception(error_msg)
+            capture_exception(error_msg)
 
     @staticmethod
     def decrypt(value: str) -> str:
@@ -22,4 +22,4 @@ class Fernet:
         except Exception as e:
             error_msg = f"decrypt error : {e}"
             print(error_msg)
-            logging.exception(error_msg)
+            capture_exception(error_msg)
