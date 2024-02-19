@@ -1,6 +1,7 @@
 # pylint: disable=no-member
 from ..models.company import Company
 from ..models.customer import Customer
+from ..utils.session import session_is_expired
 from ..utils.slugify import slugify
 from ..views.customer import View
 
@@ -11,7 +12,16 @@ class Controller:
         self._menu(session, user)
 
     @classmethod
+    def return_to_menu(self, session, user):
+        self._menu(session, user)
+
+    @classmethod
     def _menu(self, session, user) -> bool:
+        if session_is_expired(user):
+            View.logout()
+
+            return None
+
         if user.role == "Commercial":
             View.print_commercial_menu()
         else:
@@ -42,7 +52,7 @@ class Controller:
         if choice == 6 and user.role == "Commercial":
             self._delete(session, user)
 
-        self._menu(session, user)
+        self.return_to_menu(session, user)
 
     @classmethod
     def _list(self, session):
