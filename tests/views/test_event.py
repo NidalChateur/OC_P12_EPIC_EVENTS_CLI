@@ -2,7 +2,6 @@ import builtins
 
 from rich.prompt import Prompt
 
-from src.utils.fernet import Fernet
 from src.views.event import Collaborator, Contract, Event, EventForm, LocationForm, View
 from tests import MixinSetup
 
@@ -114,7 +113,7 @@ class TestView(MixinSetup):
         assert "Tel client" and obj.customer_phone in captured.out
 
         assert "Nom support" and obj.support_name in captured.out
-        assert "Email support" and Fernet.decrypt(obj.support_email) in captured.out
+        assert "Email support" and obj.support_email in captured.out
         assert "Tel support" and obj.support_phone in captured.out
 
         assert "Date de début" and obj.formatted_start_date in captured.out

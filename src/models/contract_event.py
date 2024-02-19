@@ -241,7 +241,7 @@ class Event(AbstractTimeField):
     @property
     def support_email(self):
         if self.support:
-            return self.support.email
+            return Fernet.decrypt(self.support.email)
 
         return unfilled
 

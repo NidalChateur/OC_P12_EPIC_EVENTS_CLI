@@ -1,4 +1,5 @@
 from src.models.contract_event import Event, slugify, unfilled
+from src.utils.fernet import Fernet
 from tests import MixinSetup
 
 
@@ -112,7 +113,7 @@ class TestEvent(MixinSetup):
         self.clear_db()
         qs = self.create_event_qs()
         event = qs[0]
-        assert event.support_email == event.support.email
+        assert event.support_email == Fernet.decrypt(event.support.email)
 
         event.support = None
         assert event.support_email == unfilled

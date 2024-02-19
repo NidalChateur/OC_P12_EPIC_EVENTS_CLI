@@ -12,23 +12,18 @@ class Controller:
 
     @classmethod
     def run(self):
-        # session = init_db()
-
-        # collaborators = session.query(Collaborator).all()
-
-        # if collaborators:
-        #     self._menu(session)
-        # else:
-        #     self._create_gestion_account(session)
-        #     self._menu(session)
-
         collaborators = self.session.query(Collaborator).all()
 
         if collaborators:
             self._menu(self.session)
         else:
             self._create_gestion_account(self.session)
-            self._menu(self.session)
+
+        self.re_run()
+
+    @classmethod
+    def re_run(self):
+        self.run()
 
     @classmethod
     def return_to_menu(self, session):
