@@ -1,13 +1,26 @@
+import logging
 import sys
 
 from rich.console import Console
-import logging
 
 console = Console()
 
 
 class MixinView:
     name = ""
+
+    @classmethod
+    def print_read_only_menu(self):
+        console.print("\n0. Retour", style="bold", justify="center")
+        console.print("\n1. Lister", style="bold", justify="center")
+        console.print("\n2. Rechercher", style="bold", justify="center")
+        console.print("\n3. Détail", style="bold", justify="center")
+
+    @classmethod
+    def print_edit_menu(self):
+        console.print("\n4. Créer", style="bold", justify="center")
+        console.print("\n5. Modifier", style="bold", justify="center")
+        console.print("\n6. Supprimer", style="bold", justify="center")
 
     @classmethod
     def print_create_success(self, obj):

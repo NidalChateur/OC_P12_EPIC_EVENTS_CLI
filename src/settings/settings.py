@@ -31,8 +31,6 @@ def create_fernet() -> Fernet:
 
 fernet = create_fernet()
 
-PUBLIC_KEY = "public_key"
-
 
 def init_db(Base=Base):
     engine = create_engine("sqlite:///" + str(BASE_DIR / "db.sqlite3"))
