@@ -2,6 +2,7 @@
 
 from ..models.contract_event import Contract
 from ..models.customer import Customer
+from ..utils.session import session_is_expired
 from ..utils.slugify import slugify
 from ..views.contract import View
 
@@ -15,7 +16,16 @@ class Controller:
         self._menu(session, user)
 
     @classmethod
+    def return_to_menu(self, session, user):
+        self._menu(session, user)
+
+    @classmethod
     def _menu(self, session, user) -> bool:
+        if session_is_expired(user):
+            View.logout()
+
+            return None
+
         if user.role == "Gestion":
             View.print_gestion_menu()
 
@@ -56,7 +66,7 @@ class Controller:
         if choice == 8 and user.role == "Gestion":
             self._delete(session)
 
-        self._menu(session, user)
+        self.return_to_menu(session, user)
 
     @classmethod
     def _list(self, session):

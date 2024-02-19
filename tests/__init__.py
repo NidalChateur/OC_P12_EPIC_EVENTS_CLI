@@ -32,6 +32,11 @@ class MixinSetup:
     def mock_prompt_ask(self, *args, **kwargs) -> str:
         return "user_entry"
 
+    def mock_permission_denied(self, *args, **kwargs):
+        """used to mock forbidden access in controllers during tests"""
+
+        raise PermissionError("access denied")
+
     def create_department(self, department_name: str) -> Department:
         department = Department(name=department_name)
         department.create(self.session)
@@ -42,7 +47,7 @@ class MixinSetup:
         collaborator = Collaborator(
             first_name="John",
             last_name="Doe",
-            email=Fernet.encrypt("john@gmail.com"),
+            email=Fernet.encrypt(self.CLEAR_EMAIL),
             birthdate=date(2000, 1, 1),
             phone="0102030405",
             department=self.create_department(department_name),
