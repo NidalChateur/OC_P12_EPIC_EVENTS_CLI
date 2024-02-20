@@ -1,3 +1,4 @@
+![image](./mission/icon.png)
 [![Windows](https://img.shields.io/badge/Windows-11-blue.svg?logo=Powershell)](https://www.microsoft.com/fr-fr/windows)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.1-blue.svg?logo=Powershell)](https://learn.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-7.4)
 
