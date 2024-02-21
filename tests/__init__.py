@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+from src.models.bruteforce import BruteForce
 from src.models.collaborator import Collaborator
 from src.models.company import Company
 from src.models.contract_event import Contract, Event
@@ -25,6 +26,7 @@ class MixinSetup:
             Contract,
             Location,
             Event,
+            BruteForce,
         ]
         for model in models:
             self.session.query(model).delete()

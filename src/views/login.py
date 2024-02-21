@@ -139,3 +139,8 @@ class View(MixinView):
         }
 
         return FirstConnexionForm(MultiDict(input_data))
+
+    @classmethod
+    def print_brute_force_attack_message(self):
+        message = "\nLe service est momentanément indisponible, veuillez réessayer plus tard.\n"
+        console.print(message, style="bold red")

@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 from src.utils.fernet import Fernet
 
 from .abstract import AbstractUser
+from .bruteforce import BruteForce
 from .contract_event import Event
 from .customer import Customer
 from .str_template import unfilled
@@ -27,6 +28,7 @@ class Collaborator(AbstractUser):
     # child relations
     customers = relationship(Customer, back_populates="commercial")
     events = relationship(Event, back_populates="support")
+    bruteforces = relationship(BruteForce, back_populates="user")
 
     @property
     def prompt_department(self) -> str:
@@ -72,6 +74,9 @@ class Collaborator(AbstractUser):
 
     @classmethod
     def get_with_clear_email(self, session, email: str):
+        if not email:
+            return None
+
         collaborators = session.query(Collaborator).all()
         for collaborator in collaborators:
             collaborator_email = Fernet.decrypt(collaborator.email)
