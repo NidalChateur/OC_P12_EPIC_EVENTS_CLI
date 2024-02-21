@@ -1,4 +1,5 @@
 from ..forms.collaborator import FirstConnexionForm
+from ..models.bruteforce import BruteForce
 from ..models.collaborator import Collaborator
 from ..models.department import Department
 from ..settings.settings import init_db
@@ -100,13 +101,23 @@ class Controller:
 
     @classmethod
     def _authenticate(self, session, email: str, password: str) -> Collaborator:
-        user = Collaborator.authenticate(session, email, password)
-        if user:
-            View.print_login_success(user)
+        user = Collaborator.get_with_clear_email(session, email)
+
+        if BruteForce.attack_is_detected(session, user):
+            View.print_brute_force_attack_message()
+
+            return None
+
+        authenticated_user = Collaborator.authenticate(session, email, password)
+
+        if authenticated_user:
+            BruteForce.reset_data(session, authenticated_user)
+            View.print_login_success(authenticated_user)
 
             return user
 
         else:
+            BruteForce.save_data(session, user)
             View.print_login_failure()
 
     @classmethod
