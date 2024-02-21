@@ -1,3 +1,5 @@
+import pytest
+
 from src.controllers.home import Controller as HomeMenu
 from src.controllers.login import Collaborator, Controller, Fernet
 from src.views.login import (
@@ -314,3 +316,63 @@ class TestController(MixinSetup):
         # check if the password changed
         user = self.session.get(Collaborator, 1)
         assert user.password is None
+        self.clear_db()
+
+    @pytest.mark.parametrize(
+        "attempts, user_ids",
+        [
+            # invalid user ids for 1,2,3
+            (1, {"email": "unknown@mail.com", "password": "unknown"}),
+            (2, {"email": "unknown@mail.com", "password": "unknown"}),
+            (3, {"email": "unknown@mail.com", "password": "unknown"}),
+            # valid user ids for 4,5
+            (4, {"email": "john@gmail.com", "password": "00000000pW-"}),
+            (5, {"email": "john@gmail.com", "password": "00000000pW-"}),
+        ],
+    )
+    def test_brute_force_attack(self, monkeypatch, capsys, attempts, user_ids):
+        # setup user data
+        user = self.create_collaborator("Gestion")
+        user.set_password(self.CLEAR_PASSWORD)
+        user.save(self.session)
+
+        # building LoginForm to mock View.get_user_ids()
+        form = LoginForm(MultiDict(user_ids))
+
+        # forbidden paths
+        monkeypatch.setattr(
+            Controller, "_create_gestion_account", self.mock_permission_denied
+        )
+        monkeypatch.setattr(View, "logout", self.mock_permission_denied)
+        monkeypatch.setattr(HomeMenu, "run", self.mock_permission_denied)
+        monkeypatch.setattr(Controller, "_change_password", self.mock_permission_denied)
+        monkeypatch.setattr(Controller, "_first_login", self.mock_permission_denied)
+        monkeypatch.setattr(Controller, "_create_password", self.mock_permission_denied)
+        monkeypatch.setattr(View, "print_login_success", self.mock_permission_denied)
+
+        # allowed path
+        monkeypatch.setattr(Controller, "re_run", lambda *args, **kwargs: None)
+        monkeypatch.setattr(Controller, "session", self.session)
+        monkeypatch.setattr(View, "get_user_choice", lambda *args, **kwargs: 1)
+        monkeypatch.setattr(View, "get_user_ids", lambda *args, **kwargs: form)
+        monkeypatch.setattr(Controller, "return_to_menu", lambda *args, **kwargs: None)
+
+        # run paths
+        Controller.run()
+        captured = capsys.readouterr()
+        if attempts in [1, 2, 3]:
+            assert "Saisissez des données d'authentification valides." in captured.out
+
+        if attempts in [4, 5]:
+            assert (
+                "Le service est momentanément indisponible, veuillez réessayer plus tard."
+                in captured.out
+            )
+
+            user = self.session.get(Collaborator, 1)
+            assert user
+            # check that user ids are valid
+            assert Fernet.decrypt(user.email) == user_ids["email"]
+            assert Collaborator.check_password(user_ids["password"], user.password)
+            # check that user has never been connected
+            assert user.last_login is None
